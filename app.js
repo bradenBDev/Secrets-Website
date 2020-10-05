@@ -130,7 +130,6 @@ app.get('/auth/facebook/secrets',
 
 app.get("/secrets", function (req, res) {
     const loggedIn = req.isAuthenticated();
-    console.log(loggedIn);
     User.find({secret: {$ne: null}}, function (err, foundSecrets) {
         if (err) {
             console.log(err);
