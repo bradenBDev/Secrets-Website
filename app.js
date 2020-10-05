@@ -129,11 +129,17 @@ app.get('/auth/facebook/secrets',
 // page with the foundSecrets list.
 
 app.get("/secrets", function (req, res) {
+    const loggedIn = req.isAuthenticated();
+    console.log(loggedIn);
     User.find({secret: {$ne: null}}, function (err, foundSecrets) {
         if (err) {
             console.log(err);
         } else if (foundSecrets) {
-            res.render("secrets", {usersWithSecrets: foundSecrets});
+            res.render("secrets", {
+                usersWithSecrets: foundSecrets,
+                logoutHidden: loggedIn ? "inline-block" : "none",
+                submitSecretText: loggedIn ? "Submit a Secret" : "Login to Submit a Secret"
+            });
         }
     });
 });
@@ -234,6 +240,6 @@ app.route("/login")
 
 // Spin up the server
 
-app.listen(process.env.PORT || 3000, function () {
+app.listen(process.env.PORT || 9000, function () {
     console.log("Server started on port 3000.");
 });

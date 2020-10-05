@@ -14,3 +14,7 @@ body {
   color: #fff;
   background-color: #000;
 }
+
+a {
+    margin: 0 15px 15px;
+}
